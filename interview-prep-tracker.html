@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15-Day Interview Prep Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0f14;
+    --surface: #141820;
+    --surface2: #1c2230;
+    --border: #252d3d;
+    --accent: #4ade80;
+    --accent2: #38bdf8;
+    --accent3: #f59e0b;
+    --accent4: #f472b6;
+    --text: #e2e8f0;
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --phase1: #f472b6;
+    --phase2: #f59e0b;
+    --phase3: #38bdf8;
+    --phase4: #a78bfa;
+    --phase5: #4ade80;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px 28px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .header-left {}
+  .header-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .header-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--accent); }
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .header h1 span { color: var(--accent); }
+  .header-sub {
+    margin-top: 8px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .header-stats {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .stat-pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 90px;
+  }
+  .stat-pill .num {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-pill .lbl {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* NAV */
+  .nav {
+    display: flex;
+    gap: 4px;
+    padding: 16px 40px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    letter-spacing: 0.04em;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--surface2);
+    color: var(--text);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* MAIN */
+  .main { padding: 32px 40px; max-width: 1100px; }
+
+  /* SECTION HEADER */
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* STRATEGY */
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .strategy-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .strategy-card .s-icon {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .strategy-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .strategy-card p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* DAILY SCHEDULE */
+  .schedule-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .schedule-row:last-child { border: none; }
+  .schedule-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    min-width: 60px;
+  }
+  .schedule-bar {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent2);
+    opacity: 0.3;
+  }
+  .schedule-label {
+    font-size: 13px;
+    color: var(--text-dim);
+    flex: 1;
+  }
+
+  /* PHASES */
+  .phases-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .phases-row::-webkit-scrollbar { display: none; }
+  .phase-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid;
+    white-space: nowrap;
+    font-size: 12px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+  }
+  .phase-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* PROGRESS TRACKER */
+  .progress-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+  @media(max-width: 600px) { .progress-grid { grid-template-columns: repeat(3, 1fr); } }
+  .day-dot {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--surface);
+  }
+  .day-dot:hover { border-color: var(--accent); }
+  .day-dot.done { background: rgba(74,222,128,0.08); border-color: var(--accent); }
+  .day-dot .d-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-muted);
+    display: block;
+    line-height: 1;
+  }
+  .day-dot.done .d-num { color: var(--accent); }
+  .day-dot .d-lbl {
+    font-size: 9px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+    display: block;
+  }
+  .day-dot.done .d-lbl { color: var(--accent); }
+  .day-dot .d-check { font-size: 14px; display: block; margin-top: 2px; }
+  .overall-bar-wrap {
+    margin-bottom: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .overall-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .overall-bar-track {
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .overall-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  /* DAY CARDS */
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .day-card:hover { border-color: var(--border); }
+  .day-card.open { border-color: var(--surface2); }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .day-header:hover { background: rgba(255,255,255,0.02); }
+  .day-num-badge {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .day-header-title {
+    flex: 1;
+  }
+  .day-header-title strong {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    display: block;
+  }
+  .day-header-title span {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .day-progress {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    padding: 4px 10px;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+  .day-chevron {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .day-card.open .day-chevron { transform: rotate(180deg); }
+
+  .day-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+    animation: fadeIn 0.2s ease;
+  }
+  .day-card.open .day-body { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .day-body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  @media(max-width: 700px) { .day-body-grid { grid-template-columns: 1fr; } }
+
+  .db-section {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .db-section.full-width { grid-column: 1 / -1; }
+  .db-section h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .db-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  .db-section ul li {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.4;
+  }
+  .db-section ul li:last-child { border: none; }
+  .db-section ul li::before {
+    content: '›';
+    color: var(--accent);
+    margin-right: 7px;
+    font-weight: bold;
+  }
+
+  /* CHECKLIST */
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist-item:last-child { border: none; }
+  .checklist-item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: all 0.15s;
+    position: relative;
+    background: transparent;
+  }
+  .checklist-item input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .checklist-item input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    font-size: 10px;
+    color: #000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+  }
+  .checklist-item label {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    cursor: pointer;
+    line-height: 1.4;
+  }
+  .checklist-item input:checked + label {
+    text-decoration: line-through;
+    color: var(--text-muted);
+  }
+
+  /* REFLECTION */
+  .reflection-area textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    padding: 10px;
+    resize: vertical;
+    min-height: 60px;
+    margin-bottom: 8px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .reflection-area textarea:focus { border-color: var(--accent2); }
+  .reflection-area textarea::placeholder { color: var(--text-muted); }
+  .reflection-area .r-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  /* CODING PROBLEMS */
+  .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .problem-card:hover { border-color: var(--accent2); }
+  .problem-card.solved { background: rgba(74,222,128,0.05); border-color: rgba(74,222,128,0.3); }
+  .problem-card input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    background: transparent;
+    transition: all 0.15s;
+  }
+  .problem-card input:checked { background: var(--accent); border-color: var(--accent); }
+  .problem-card input:checked::after {
+    content: '✓';
+    position: absolute;
+    font-size: 9px;
+    color: #000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+  }
+  .problem-card .p-name {
+    font-size: 12px;
+    color: var(--text-dim);
+    flex: 1;
+  }
+  .problem-card.solved .p-name { text-decoration: line-through; color: var(--text-muted); }
+  .problem-card .p-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* UTILITY */
+  .tab-section { display: none; }
+  .tab-section.active { display: block; }
+
+  .divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+  @media(max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .info-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .info-box h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  .save-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: opacity 0.15s;
+  }
+  .save-btn:hover { opacity: 0.85; }
+
+  .complete-day-btn {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 6px;
+    padding: 6px 16px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: all 0.15s;
+    letter-spacing: 0.05em;
+  }
+  .complete-day-btn:hover { background: var(--accent); color: #000; }
+  .complete-day-btn.done { background: rgba(74,222,128,0.1); }
+
+  .tip-box {
+    background: rgba(56,189,248,0.06);
+    border: 1px solid rgba(56,189,248,0.2);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--accent2);
+    line-height: 1.5;
+  }
+  .tip-box strong { display: block; margin-bottom: 3px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media(max-width: 700px) {
+    .header { padding: 20px; }
+    .nav { padding: 12px 20px; }
+    .main { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="header-tag">Software Engineer · Interview Prep</div>
+    <h1>15-Day <span>Preparation</span> Tracker</h1>
+    <p class="header-sub">React / Next.js · 5 hrs/day · Target: Indian Startups & Product Companies</p>
+  </div>
+  <div class="header-stats">
+    <div class="stat-pill">
+      <span class="num" id="days-done">0</span>
+      <span class="lbl">Days Done</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num" id="tasks-done">0</span>
+      <span class="lbl">Tasks</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num" id="problems-done">0</span>
+      <span class="lbl">Problems</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn active" onclick="showTab('overview')">Overview</button>
+  <button class="nav-btn" onclick="showTab('plan')">15-Day Plan</button>
+  <button class="nav-btn" onclick="showTab('problems')">Coding Problems</button>
+  <button class="nav-btn" onclick="showTab('progress')">Progress</button>
+</div>
+
+<div class="main">
+
+<!-- ======================== OVERVIEW TAB ======================== -->
+<div id="tab-overview" class="tab-section active">
+
+  <div class="section-title">Daily Schedule (5 hrs/day)</div>
+  <div class="info-box" style="margin-bottom:32px;">
+    <div class="schedule-row">
+      <span class="schedule-time">1 hr</span>
+      <div class="schedule-bar" style="width:80px;background:var(--phase2);opacity:0.6;"></div>
+      <span class="schedule-label">JavaScript Fundamentals</span>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-time">1.5 hrs</span>
+      <div class="schedule-bar" style="width:120px;background:var(--phase3);opacity:0.6;"></div>
+      <span class="schedule-label">React / Next.js Concepts</span>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-time">1 hr</span>
+      <div class="schedule-bar" style="width:80px;background:var(--phase4);opacity:0.6;"></div>
+      <span class="schedule-label">Coding Problems</span>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-time">1 hr</span>
+      <div class="schedule-bar" style="width:80px;background:var(--phase1);opacity:0.6;"></div>
+      <span class="schedule-label">Resume Project Explanation</span>
+    </div>
+    <div class="schedule-row">
+      <span class="schedule-time">30 min</span>
+      <div class="schedule-bar" style="width:40px;background:var(--phase5);opacity:0.6;"></div>
+      <span class="schedule-label">Revision & Speaking Practice</span>
+    </div>
+  </div>
+
+  <div class="section-title">5 Preparation Phases</div>
+  <div class="phases-row">
+    <div class="phase-badge" style="color:var(--phase1);border-color:rgba(244,114,182,0.3);background:rgba(244,114,182,0.05);">
+      <div class="phase-dot" style="background:var(--phase1);"></div>
+      Phase 1 · Days 1–3 · Resume Recovery
+    </div>
+    <div class="phase-badge" style="color:var(--phase2);border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.05);">
+      <div class="phase-dot" style="background:var(--phase2);"></div>
+      Phase 2 · Days 4–6 · JS Fundamentals
+    </div>
+    <div class="phase-badge" style="color:var(--phase3);border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.05);">
+      <div class="phase-dot" style="background:var(--phase3);"></div>
+      Phase 3 · Days 7–10 · React Core
+    </div>
+    <div class="phase-badge" style="color:var(--phase4);border-color:rgba(167,139,250,0.3);background:rgba(167,139,250,0.05);">
+      <div class="phase-dot" style="background:var(--phase4);"></div>
+      Phase 4 · Days 11–12 · Backend & APIs
+    </div>
+    <div class="phase-badge" style="color:var(--phase5);border-color:rgba(74,222,128,0.3);background:rgba(74,222,128,0.05);">
+      <div class="phase-dot" style="background:var(--phase5);"></div>
+      Phase 5 · Days 13–15 · Mock Interviews
+    </div>
+  </div>
+
+  <div class="section-title">Preparation Strategy</div>
+  <div class="strategy-grid" style="margin-bottom:40px;">
+    <div class="strategy-card">
+      <div class="s-icon">📂</div>
+      <h3>Own Your Projects</h3>
+      <p>Re-read your own code. Understand every decision. Be able to defend every technical choice in ProCoach, RDR Tech, and KhetiValah.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="s-icon">🧠</div>
+      <h3>Rebuild Fundamentals</h3>
+      <p>Stop relying on AI for code. Write closures, promises, useEffect, and form logic from scratch until it flows naturally.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="s-icon">🗣️</div>
+      <h3>Speak Out Loud Daily</h3>
+      <p>Explain every concept you study as if teaching a junior engineer. Record yourself if needed. Clarity in speech = clarity in thinking.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="s-icon">💻</div>
+      <h3>Code Without Hints</h3>
+      <p>Attempt every problem without AI first. Struggle is the learning. Only check solutions after you've tried for 25+ minutes.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="s-icon">🎯</div>
+      <h3>Target-Specific Prep</h3>
+      <p>Indian startups want: practical React, state management, API integration, and system thinking. Not LeetCode hard. Be ready for take-home tasks.</p>
+    </div>
+    <div class="strategy-card">
+      <div class="s-icon">📈</div>
+      <h3>Track Everything</h3>
+      <p>Use this tracker daily. Fill the reflection boxes. Progress compounds. Knowing what's still confusing is as valuable as knowing what you've mastered.</p>
+    </div>
+  </div>
+
+  <div class="section-title">Your Resume Projects (Know These Cold)</div>
+  <div class="two-col">
+    <div class="info-box">
+      <h3>🎓 ProCoach – Coaching Marketplace</h3>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› Role-based dashboards (RBAC)</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› Stripe payment flows & webhooks</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› Multi-step enrollment forms (RHF + Zod)</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› Next.js SSR for SEO</li>
+        <li style="padding:5px 0;font-size:12px;color:var(--text-dim);">› 500+ active users</li>
+      </ul>
+      <div class="tip-box"><strong>Key Question</strong> How did you implement role-based routing and protect dashboard pages?</div>
+    </div>
+    <div class="info-box">
+      <h3>⚙️ RDR Tech – Workflow Platform</h3>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› 1500+ workflows managed</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› Razorpay subscription billing</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› Chart.js analytics dashboards</li>
+        <li style="padding:5px 0;font-size:12px;color:var(--text-dim);">› Performance optimization for large data</li>
+      </ul>
+      <div class="tip-box"><strong>Key Question</strong> How did you handle performance when rendering 1500+ workflow records?</div>
+    </div>
+    <div class="info-box">
+      <h3>🌾 KhetiValah – Agricultural Marketplace</h3>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› Vendor booking system (300+ vendors)</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› GST billing with PDF invoice generation</li>
+        <li style="padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› Razorpay payment integration</li>
+        <li style="padding:5px 0;font-size:12px;color:var(--text-dim);">› Complex booking state management</li>
+      </ul>
+      <div class="tip-box"><strong>Key Question</strong> How did you structure the booking flow and handle payment failures?</div>
+    </div>
+    <div class="info-box">
+      <h3>🔑 Interview Process to Expect</h3>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› <strong style="color:var(--phase1);">HR Round</strong> — Background, salary, culture fit</li>
+        <li style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-dim);">› <strong style="color:var(--phase3);">Technical Round</strong> — JS, React, coding, system design</li>
+        <li style="padding:6px 0;font-size:12px;color:var(--text-dim);">› <strong style="color:var(--phase5);">Hiring Manager</strong> — Project depth, decision making, team fit</li>
+      </ul>
+      <div class="tip-box"><strong>Tip</strong> Indian startups often give take-home assignments. Build something clean and document your choices.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PLAN TAB ======================== -->
+<div id="tab-plan" class="tab-section">
+
+  <div class="section-title">Phase 1 · Days 1–3 · Resume Recovery & Project Explanation</div>
+
+  <!-- DAY 1 -->
+  <div class="day-card" id="card-1">
+    <div class="day-header" onclick="toggleDay(1)">
+      <div class="day-num-badge" style="background:rgba(244,114,182,0.1);color:var(--phase1);border:1px solid rgba(244,114,182,0.3);">DAY 01</div>
+      <div class="day-header-title">
+        <strong>ProCoach Deep Dive</strong>
+        <span>Phase 1 · Resume Recovery · RBAC + Stripe + Next.js SSR</span>
+      </div>
+      <span class="day-progress" id="progress-1">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>Re-read your ProCoach codebase end to end</li>
+            <li>Understand the RBAC implementation (roles, guards, routes)</li>
+            <li>Review Stripe checkout session and webhook handling</li>
+            <li>Review Next.js SSR pages — getServerSideProps vs getStaticProps</li>
+            <li>Review multi-step form with React Hook Form + Zod</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain Out Loud</h4>
+          <ul>
+            <li>How does RBAC work in your app? Walk through a user flow.</li>
+            <li>What happens when a Stripe payment fails? How do you handle it?</li>
+            <li>Why did you choose SSR for ProCoach? What's the benefit?</li>
+            <li>How does Zod validate your multi-step form?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Write a simple role-based route guard in React from memory</li>
+            <li>Write a Zod schema for a signup form (name, email, password, role)</li>
+            <li>Implement a controlled multi-step form without libraries</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions to Practice</h4>
+          <ul>
+            <li>"Tell me about ProCoach — what problem does it solve?"</li>
+            <li>"How did you implement role-based access control?"</li>
+            <li>"What was the most difficult technical challenge you faced?"</li>
+            <li>"How did you test Stripe webhooks locally?"</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d1t1" onchange="updateProgress(1)"><label for="d1t1">Re-read ProCoach codebase and document key decisions</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d1t2" onchange="updateProgress(1)"><label for="d1t2">Draw the RBAC flow on paper (roles → permissions → routes)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d1t3" onchange="updateProgress(1)"><label for="d1t3">Write a 2-minute spoken explanation of ProCoach (record it)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d1t4" onchange="updateProgress(1)"><label for="d1t4">Write a Zod + RHF form schema from scratch</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d1t5" onchange="updateProgress(1)"><label for="d1t5">Answer all 4 interview questions out loud</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn / remember today?</span>
+          <textarea id="ref-1a" placeholder="Write what you recalled or understood better..."></textarea>
+          <span class="r-label">What is still confusing or needs more work?</span>
+          <textarea id="ref-1b" placeholder="Be honest — this is just for you..."></textarea>
+          <button class="save-btn" onclick="saveReflection(1)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-1" onclick="completeDay(1)">Mark Day 1 Complete</button>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" id="card-2">
+    <div class="day-header" onclick="toggleDay(2)">
+      <div class="day-num-badge" style="background:rgba(244,114,182,0.1);color:var(--phase1);border:1px solid rgba(244,114,182,0.3);">DAY 02</div>
+      <div class="day-header-title">
+        <strong>RDR Tech Deep Dive</strong>
+        <span>Phase 1 · Razorpay + Chart.js + Performance</span>
+      </div>
+      <span class="day-progress" id="progress-2">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>Re-read RDR Tech codebase — workflow list, subscription billing</li>
+            <li>Understand Razorpay subscription flow (create → activate → webhook)</li>
+            <li>Review Chart.js integration — how data is fed and updated</li>
+            <li>Identify where you used pagination or virtualization for 1500+ rows</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>Walk me through the Razorpay subscription lifecycle.</li>
+            <li>How did you display 1500+ workflows without freezing the UI?</li>
+            <li>What chart types did you use and why?</li>
+            <li>How did you structure state for the workflow management?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Implement a simple paginated list in React (useState, slice)</li>
+            <li>Write a Chart.js line chart component in React from memory</li>
+            <li>Build a basic subscription status display component</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"How did you scale the UI to handle 1500+ workflows?"</li>
+            <li>"Explain the Razorpay webhook flow you implemented."</li>
+            <li>"How did you handle subscription cancellation and edge cases?"</li>
+            <li>"What React performance techniques did you use here?"</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d2t1" onchange="updateProgress(2)"><label for="d2t1">Re-read RDR Tech codebase and note key architecture decisions</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d2t2" onchange="updateProgress(2)"><label for="d2t2">Draw the Razorpay subscription flow on paper</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d2t3" onchange="updateProgress(2)"><label for="d2t3">Build a paginated list component from scratch</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d2t4" onchange="updateProgress(2)"><label for="d2t4">Practice explaining the performance problem and your solution</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d2t5" onchange="updateProgress(2)"><label for="d2t5">Answer all 4 interview questions out loud</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn / remember today?</span>
+          <textarea id="ref-2a" placeholder="Write what you recalled or understood better..."></textarea>
+          <span class="r-label">What is still confusing?</span>
+          <textarea id="ref-2b" placeholder="Be honest — this is just for you..."></textarea>
+          <button class="save-btn" onclick="saveReflection(2)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-2" onclick="completeDay(2)">Mark Day 2 Complete</button>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" id="card-3">
+    <div class="day-header" onclick="toggleDay(3)">
+      <div class="day-num-badge" style="background:rgba(244,114,182,0.1);color:var(--phase1);border:1px solid rgba(244,114,182,0.3);">DAY 03</div>
+      <div class="day-header-title">
+        <strong>KhetiValah + Project Story Practice</strong>
+        <span>Phase 1 · Booking system, GST billing, full resume narrative</span>
+      </div>
+      <span class="day-progress" id="progress-3">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>Re-read KhetiValah — booking flow and state management</li>
+            <li>Review GST invoice generation logic (PDF creation)</li>
+            <li>Understand vendor onboarding and search/filter logic</li>
+            <li>Review Razorpay payment and failure recovery</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>Walk through the booking flow from vendor search to payment.</li>
+            <li>How did you generate GST-compliant PDF invoices?</li>
+            <li>What happens if a payment fails mid-booking?</li>
+            <li>How did you manage vendor and user state simultaneously?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Build a multi-step booking form with state (Step 1 → 2 → 3)</li>
+            <li>Implement a search + filter list for 300+ items with debounce</li>
+            <li>Write a function to generate a simple invoice object (items, tax, total)</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"How did you design the booking state machine?"</li>
+            <li>"Explain the GST billing logic you implemented."</li>
+            <li>"Tell me about a bug you fixed in KhetiValah — the hardest one."</li>
+            <li>"How did you handle concurrent bookings for the same vendor slot?"</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d3t1" onchange="updateProgress(3)"><label for="d3t1">Re-read KhetiValah and map out the booking state flow</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d3t2" onchange="updateProgress(3)"><label for="d3t2">Build a 3-step booking form from scratch</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d3t3" onchange="updateProgress(3)"><label for="d3t3">Practice your "Tell me about yourself" — mention all 3 projects naturally</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d3t4" onchange="updateProgress(3)"><label for="d3t4">Write a 1-paragraph narrative for each project (keep it crisp)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d3t5" onchange="updateProgress(3)"><label for="d3t5">Mock 10-minute self-introduction out loud</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn / remember today?</span>
+          <textarea id="ref-3a" placeholder="Write what you recalled..."></textarea>
+          <span class="r-label">What is still confusing?</span>
+          <textarea id="ref-3b" placeholder="Be honest..."></textarea>
+          <button class="save-btn" onclick="saveReflection(3)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-3" onclick="completeDay(3)">Mark Day 3 Complete</button>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:32px;">Phase 2 · Days 4–6 · JavaScript Fundamentals</div>
+
+  <!-- DAY 4 -->
+  <div class="day-card" id="card-4">
+    <div class="day-header" onclick="toggleDay(4)">
+      <div class="day-num-badge" style="background:rgba(245,158,11,0.1);color:var(--phase2);border:1px solid rgba(245,158,11,0.3);">DAY 04</div>
+      <div class="day-header-title">
+        <strong>JS Core: Closures, Hoisting, var/let/const</strong>
+        <span>Phase 2 · JavaScript Fundamentals</span>
+      </div>
+      <span class="day-progress" id="progress-4">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>Execution context and call stack</li>
+            <li>Hoisting — variables vs functions</li>
+            <li>var vs let vs const — scope, TDZ, redeclaration</li>
+            <li>Closures — definition, examples, use cases</li>
+            <li>Lexical scope and scope chain</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>What is a closure? Give 3 real-world use cases.</li>
+            <li>What is hoisting? What gets hoisted and what doesn't?</li>
+            <li>What is the Temporal Dead Zone?</li>
+            <li>Why is var considered bad practice?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Write a counter using closure (increment, decrement, reset)</li>
+            <li>Fix a classic var-in-loop closure bug using let</li>
+            <li>Write a memoize function using closures</li>
+            <li>Predict output: var/let hoisting quiz (5 examples)</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"Explain closures with an example from your project."</li>
+            <li>"What is the difference between function scope and block scope?"</li>
+            <li>"How does hoisting work with function declarations vs expressions?"</li>
+            <li>"What would this code output?" (output prediction)</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d4t1" onchange="updateProgress(4)"><label for="d4t1">Study closures, hoisting, and scope (read MDN, not AI)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d4t2" onchange="updateProgress(4)"><label for="d4t2">Write a closure counter from memory</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d4t3" onchange="updateProgress(4)"><label for="d4t3">Solve 5 output-prediction exercises for hoisting</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d4t4" onchange="updateProgress(4)"><label for="d4t4">Write a memoize function using closures</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d4t5" onchange="updateProgress(4)"><label for="d4t5">Explain closures out loud in 90 seconds</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn today?</span>
+          <textarea id="ref-4a" placeholder="Write what clicked for you..."></textarea>
+          <span class="r-label">What is still confusing?</span>
+          <textarea id="ref-4b" placeholder="Be specific..."></textarea>
+          <button class="save-btn" onclick="saveReflection(4)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-4" onclick="completeDay(4)">Mark Day 4 Complete</button>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card" id="card-5">
+    <div class="day-header" onclick="toggleDay(5)">
+      <div class="day-num-badge" style="background:rgba(245,158,11,0.1);color:var(--phase2);border:1px solid rgba(245,158,11,0.3);">DAY 05</div>
+      <div class="day-header-title">
+        <strong>JS Arrays, Objects & Functional Methods</strong>
+        <span>Phase 2 · map · filter · reduce · spread · destructuring</span>
+      </div>
+      <span class="day-progress" id="progress-5">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>Array methods: map, filter, reduce, find, some, every, flat</li>
+            <li>Object methods: Object.keys, values, entries, assign, freeze</li>
+            <li>Spread operator and rest parameters</li>
+            <li>Destructuring (arrays and objects, nested)</li>
+            <li>Immutability concepts</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>What does reduce do? Explain with a real example.</li>
+            <li>What's the difference between map and forEach?</li>
+            <li>How does spread work for arrays vs objects?</li>
+            <li>Why is immutability important in React state?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Use reduce to group an array of objects by category</li>
+            <li>Implement Array.prototype.flat() manually</li>
+            <li>Write a deep clone function (without JSON.parse trick)</li>
+            <li>Deduplicate an array of objects by a key</li>
+            <li>Flatten a nested object into a flat key-value pair</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"Implement map() from scratch."</li>
+            <li>"How do you remove duplicates from an array? Multiple approaches."</li>
+            <li>"What does Object.freeze do? Is it deep freeze?"</li>
+            <li>"Group these items by category using reduce."</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d5t1" onchange="updateProgress(5)"><label for="d5t1">Study all array and object methods (write examples by hand)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d5t2" onchange="updateProgress(5)"><label for="d5t2">Implement map() and filter() from scratch</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d5t3" onchange="updateProgress(5)"><label for="d5t3">Use reduce to group items by category</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d5t4" onchange="updateProgress(5)"><label for="d5t4">Write a deep clone function without JSON.parse</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d5t5" onchange="updateProgress(5)"><label for="d5t5">Explain immutability and why it matters in React</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn?</span>
+          <textarea id="ref-5a" placeholder="..."></textarea>
+          <span class="r-label">What is still confusing?</span>
+          <textarea id="ref-5b" placeholder="..."></textarea>
+          <button class="save-btn" onclick="saveReflection(5)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-5" onclick="completeDay(5)">Mark Day 5 Complete</button>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card" id="card-6">
+    <div class="day-header" onclick="toggleDay(6)">
+      <div class="day-num-badge" style="background:rgba(245,158,11,0.1);color:var(--phase2);border:1px solid rgba(245,158,11,0.3);">DAY 06</div>
+      <div class="day-header-title">
+        <strong>Async JS: Event Loop, Promises, async/await</strong>
+        <span>Phase 2 · Asynchronous JavaScript mastery</span>
+      </div>
+      <span class="day-progress" id="progress-6">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>Event loop — call stack, web APIs, callback queue, microtask queue</li>
+            <li>Callbacks — callback hell, why promises are better</li>
+            <li>Promises — .then, .catch, .finally, Promise.all, Promise.race</li>
+            <li>async/await — error handling with try/catch</li>
+            <li>Debounce and throttle — when and why to use</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>Explain the event loop. What is the microtask queue?</li>
+            <li>What's the difference between Promise.all and Promise.race?</li>
+            <li>How does async/await work under the hood?</li>
+            <li>When would you use debounce vs throttle?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Implement debounce from scratch</li>
+            <li>Implement throttle from scratch</li>
+            <li>Write a retry function with async/await (retry 3 times on failure)</li>
+            <li>Predict the output of a Promise + setTimeout mixing quiz</li>
+            <li>Implement Promise.all from scratch</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"Explain the event loop with a code example."</li>
+            <li>"Write a debounce function."</li>
+            <li>"What is the difference between microtasks and macrotasks?"</li>
+            <li>"How do you handle multiple parallel API calls?"</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d6t1" onchange="updateProgress(6)"><label for="d6t1">Watch/study the event loop visually (Loupe or Philip Roberts talk)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d6t2" onchange="updateProgress(6)"><label for="d6t2">Implement debounce from scratch (without looking it up)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d6t3" onchange="updateProgress(6)"><label for="d6t3">Implement throttle from scratch</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d6t4" onchange="updateProgress(6)"><label for="d6t4">Write a retry wrapper for async API calls</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d6t5" onchange="updateProgress(6)"><label for="d6t5">Explain the event loop out loud without notes</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What clicked today?</span>
+          <textarea id="ref-6a" placeholder="..."></textarea>
+          <span class="r-label">What needs more practice?</span>
+          <textarea id="ref-6b" placeholder="..."></textarea>
+          <button class="save-btn" onclick="saveReflection(6)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-6" onclick="completeDay(6)">Mark Day 6 Complete</button>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:32px;">Phase 3 · Days 7–10 · React Core Concepts</div>
+
+  <!-- DAY 7 -->
+  <div class="day-card" id="card-7">
+    <div class="day-header" onclick="toggleDay(7)">
+      <div class="day-num-badge" style="background:rgba(56,189,248,0.1);color:var(--phase3);border:1px solid rgba(56,189,248,0.3);">DAY 07</div>
+      <div class="day-header-title">
+        <strong>React Core: Virtual DOM, useState, useEffect</strong>
+        <span>Phase 3 · React rendering, lifecycle, and effects</span>
+      </div>
+      <span class="day-progress" id="progress-7">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>Virtual DOM — what it is, diffing algorithm, reconciliation</li>
+            <li>Component lifecycle (mount, update, unmount)</li>
+            <li>useState — batching, functional updates, when re-renders happen</li>
+            <li>useEffect — dependency array, cleanup function, common pitfalls</li>
+            <li>Strict mode double invocation</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>How does the Virtual DOM improve performance?</li>
+            <li>When does a React component re-render?</li>
+            <li>What is the useEffect cleanup function for?</li>
+            <li>What happens if you omit a dependency from useEffect?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Build a custom useFetch hook (loading, data, error states)</li>
+            <li>Build a timer with useEffect cleanup (clear interval on unmount)</li>
+            <li>Implement a counter with functional setState updates</li>
+            <li>Debug a stale closure bug in useEffect</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"Explain the React rendering process."</li>
+            <li>"What's the difference between useEffect with [] and without []?"</li>
+            <li>"How do you prevent memory leaks in useEffect?"</li>
+            <li>"What causes unnecessary re-renders in React?"</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d7t1" onchange="updateProgress(7)"><label for="d7t1">Study Virtual DOM, reconciliation, and diffing</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d7t2" onchange="updateProgress(7)"><label for="d7t2">Build a useFetch hook from scratch</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d7t3" onchange="updateProgress(7)"><label for="d7t3">Build a timer that cleans up correctly on unmount</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d7t4" onchange="updateProgress(7)"><label for="d7t4">Explain all useEffect dependency array scenarios out loud</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d7t5" onchange="updateProgress(7)"><label for="d7t5">Study and answer all 4 interview questions</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn?</span>
+          <textarea id="ref-7a" placeholder="..."></textarea>
+          <span class="r-label">What is still confusing?</span>
+          <textarea id="ref-7b" placeholder="..."></textarea>
+          <button class="save-btn" onclick="saveReflection(7)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-7" onclick="completeDay(7)">Mark Day 7 Complete</button>
+    </div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div class="day-card" id="card-8">
+    <div class="day-header" onclick="toggleDay(8)">
+      <div class="day-num-badge" style="background:rgba(56,189,248,0.1);color:var(--phase3);border:1px solid rgba(56,189,248,0.3);">DAY 08</div>
+      <div class="day-header-title">
+        <strong>React Performance: useMemo, useCallback, React.memo</strong>
+        <span>Phase 3 · Performance optimization</span>
+      </div>
+      <span class="day-progress" id="progress-8">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>useMemo — memoizing expensive calculations</li>
+            <li>useCallback — memoizing functions for child props</li>
+            <li>React.memo — preventing child re-renders</li>
+            <li>When NOT to use these (over-optimization)</li>
+            <li>React DevTools Profiler — how to identify performance issues</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>What's the difference between useMemo and useCallback?</li>
+            <li>When should you use React.memo?</li>
+            <li>What is referential equality and why does it matter?</li>
+            <li>Give a real example from your projects where you optimized performance.</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Build a sortable list where sort is memoized with useMemo</li>
+            <li>Build a parent-child component where child uses React.memo</li>
+            <li>Pass a stable callback with useCallback to prevent re-renders</li>
+            <li>Profile a component with React DevTools and identify re-renders</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"When would you use useMemo vs useCallback?"</li>
+            <li>"How did you optimize a slow component in your project?"</li>
+            <li>"What is referential equality? Why does it matter in React?"</li>
+            <li>"Is it always good to wrap everything in useMemo?"</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d8t1" onchange="updateProgress(8)"><label for="d8t1">Study useMemo, useCallback, React.memo with examples</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d8t2" onchange="updateProgress(8)"><label for="d8t2">Build a memoized sorted list component</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d8t3" onchange="updateProgress(8)"><label for="d8t3">Demonstrate React.memo stopping a child re-render</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d8t4" onchange="updateProgress(8)"><label for="d8t4">Connect your performance knowledge to your RDR Tech project</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d8t5" onchange="updateProgress(8)"><label for="d8t5">Answer all interview questions out loud confidently</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn?</span>
+          <textarea id="ref-8a" placeholder="..."></textarea>
+          <span class="r-label">What is still confusing?</span>
+          <textarea id="ref-8b" placeholder="..."></textarea>
+          <button class="save-btn" onclick="saveReflection(8)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-8" onclick="completeDay(8)">Mark Day 8 Complete</button>
+    </div>
+  </div>
+
+  <!-- DAY 9 -->
+  <div class="day-card" id="card-9">
+    <div class="day-header" onclick="toggleDay(9)">
+      <div class="day-num-badge" style="background:rgba(56,189,248,0.1);color:var(--phase3);border:1px solid rgba(56,189,248,0.3);">DAY 09</div>
+      <div class="day-header-title">
+        <strong>Context API, Forms & State Management</strong>
+        <span>Phase 3 · Context, controlled forms, React Hook Form</span>
+      </div>
+      <span class="day-progress" id="progress-9">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>Context API — createContext, Provider, useContext</li>
+            <li>Context vs props drilling vs state management libraries</li>
+            <li>Controlled vs uncontrolled inputs</li>
+            <li>React Hook Form — register, handleSubmit, formState, errors</li>
+            <li>Zod schema validation with RHF (zodResolver)</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>When would you use Context over prop drilling?</li>
+            <li>What's the difference between controlled and uncontrolled inputs?</li>
+            <li>How does React Hook Form improve performance over controlled forms?</li>
+            <li>How did you use Zod in ProCoach for validation?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Build a theme switcher using Context API</li>
+            <li>Build a login form with React Hook Form + Zod validation</li>
+            <li>Implement a multi-step form with RHF (step 1: details, step 2: payment)</li>
+            <li>Show field-level error messages with React Hook Form</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"How does React Hook Form avoid re-renders on every keystroke?"</li>
+            <li>"When would you choose Redux over Context API?"</li>
+            <li>"How did you implement the multi-step form in ProCoach?"</li>
+            <li>"Build a form with validation — live coding challenge."</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d9t1" onchange="updateProgress(9)"><label for="d9t1">Study Context API and build a theme switcher</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d9t2" onchange="updateProgress(9)"><label for="d9t2">Build a login form with RHF + Zod from scratch</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d9t3" onchange="updateProgress(9)"><label for="d9t3">Implement a 2-step form with RHF field state</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d9t4" onchange="updateProgress(9)"><label for="d9t4">Explain controlled vs uncontrolled inputs clearly</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d9t5" onchange="updateProgress(9)"><label for="d9t5">Connect form knowledge back to ProCoach project explanation</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn?</span>
+          <textarea id="ref-9a" placeholder="..."></textarea>
+          <span class="r-label">What is still confusing?</span>
+          <textarea id="ref-9b" placeholder="..."></textarea>
+          <button class="save-btn" onclick="saveReflection(9)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-9" onclick="completeDay(9)">Mark Day 9 Complete</button>
+    </div>
+  </div>
+
+  <!-- DAY 10 -->
+  <div class="day-card" id="card-10">
+    <div class="day-header" onclick="toggleDay(10)">
+      <div class="day-num-badge" style="background:rgba(56,189,248,0.1);color:var(--phase3);border:1px solid rgba(56,189,248,0.3);">DAY 10</div>
+      <div class="day-header-title">
+        <strong>Next.js: SSR, CSR, Code Splitting, Lazy Loading</strong>
+        <span>Phase 3 · Next.js deep dive</span>
+      </div>
+      <span class="day-progress" id="progress-10">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>SSR vs CSR vs SSG vs ISR — when to use which</li>
+            <li>getServerSideProps vs getStaticProps vs getStaticPaths</li>
+            <li>App Router vs Pages Router (Next.js 13+)</li>
+            <li>Code splitting and dynamic imports (next/dynamic)</li>
+            <li>Image optimization, font optimization, metadata API</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>Why did you choose SSR for ProCoach? What's the benefit?</li>
+            <li>What's the difference between getServerSideProps and getStaticProps?</li>
+            <li>How does next/dynamic work and when would you use it?</li>
+            <li>What is ISR and when is it useful?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Build a Next.js page using getServerSideProps to fetch data</li>
+            <li>Lazy load a heavy chart component using next/dynamic</li>
+            <li>Implement a protected route in Next.js (check JWT in middleware)</li>
+            <li>Set up metadata in a Next.js page for SEO</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"Why SSR over client-side rendering for a marketplace?"</li>
+            <li>"How do you protect pages in Next.js without exposing the token?"</li>
+            <li>"What is hydration? What are hydration errors?"</li>
+            <li>"How did you deploy your Next.js app?"</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d10t1" onchange="updateProgress(10)"><label for="d10t1">Study Next.js rendering strategies (SSR, CSR, SSG, ISR)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d10t2" onchange="updateProgress(10)"><label for="d10t2">Build a page with getServerSideProps from scratch</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d10t3" onchange="updateProgress(10)"><label for="d10t3">Lazy load a component using next/dynamic</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d10t4" onchange="updateProgress(10)"><label for="d10t4">Implement a JWT-protected route in Next.js middleware</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d10t5" onchange="updateProgress(10)"><label for="d10t5">Explain all Next.js rendering types confidently out loud</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn?</span>
+          <textarea id="ref-10a" placeholder="..."></textarea>
+          <span class="r-label">What is still confusing?</span>
+          <textarea id="ref-10b" placeholder="..."></textarea>
+          <button class="save-btn" onclick="saveReflection(10)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-10" onclick="completeDay(10)">Mark Day 10 Complete</button>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:32px;">Phase 4 · Days 11–12 · Backend & APIs</div>
+
+  <!-- DAY 11 -->
+  <div class="day-card" id="card-11">
+    <div class="day-header" onclick="toggleDay(11)">
+      <div class="day-num-badge" style="background:rgba(167,139,250,0.1);color:var(--phase4);border:1px solid rgba(167,139,250,0.3);">DAY 11</div>
+      <div class="day-header-title">
+        <strong>REST APIs: Design, HTTP Methods, Status Codes</strong>
+        <span>Phase 4 · Backend understanding for frontend engineers</span>
+      </div>
+      <span class="day-progress" id="progress-11">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>REST principles — statelessness, resources, uniform interface</li>
+            <li>HTTP methods: GET, POST, PUT, PATCH, DELETE</li>
+            <li>HTTP status codes: 200, 201, 400, 401, 403, 404, 409, 422, 500</li>
+            <li>Request lifecycle — headers, body, params, query strings</li>
+            <li>API versioning and error response standards</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>What is the difference between PUT and PATCH?</li>
+            <li>When do you get a 401 vs a 403?</li>
+            <li>How do you handle API errors in your React apps?</li>
+            <li>What does CORS mean and why does it happen?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Build an API service layer in React (axios interceptors for errors)</li>
+            <li>Write an API call with loading, error, and success states</li>
+            <li>Handle 401 errors globally and redirect to login</li>
+            <li>Design REST endpoints for ProCoach booking (on paper)</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"How do you structure API calls in your React projects?"</li>
+            <li>"How do you handle token expiry mid-session?"</li>
+            <li>"What's the difference between authentication and authorization?"</li>
+            <li>"Design the REST API for a booking system."</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d11t1" onchange="updateProgress(11)"><label for="d11t1">Study REST principles and all key HTTP status codes</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d11t2" onchange="updateProgress(11)"><label for="d11t2">Build axios interceptor for global error handling</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d11t3" onchange="updateProgress(11)"><label for="d11t3">Design REST endpoints for KhetiValah on paper</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d11t4" onchange="updateProgress(11)"><label for="d11t4">Handle token refresh / 401 redirect in your React app</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d11t5" onchange="updateProgress(11)"><label for="d11t5">Explain CORS, its causes, and how you've encountered it</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn?</span>
+          <textarea id="ref-11a" placeholder="..."></textarea>
+          <span class="r-label">What is still confusing?</span>
+          <textarea id="ref-11b" placeholder="..."></textarea>
+          <button class="save-btn" onclick="saveReflection(11)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-11" onclick="completeDay(11)">Mark Day 11 Complete</button>
+    </div>
+  </div>
+
+  <!-- DAY 12 -->
+  <div class="day-card" id="card-12">
+    <div class="day-header" onclick="toggleDay(12)">
+      <div class="day-num-badge" style="background:rgba(167,139,250,0.1);color:var(--phase4);border:1px solid rgba(167,139,250,0.3);">DAY 12</div>
+      <div class="day-header-title">
+        <strong>JWT Auth, Security & System Thinking</strong>
+        <span>Phase 4 · Authentication, security basics, system design</span>
+      </div>
+      <span class="day-progress" id="progress-12">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>JWT structure — header, payload, signature</li>
+            <li>Access tokens vs refresh tokens</li>
+            <li>Token storage — localStorage vs httpOnly cookies</li>
+            <li>OAuth 2.0 basics (used in Next.js auth libraries)</li>
+            <li>Basic system design: how you'd design a booking system</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Concepts to Explain</h4>
+          <ul>
+            <li>How does JWT authentication work end to end?</li>
+            <li>Why is localStorage insecure for tokens?</li>
+            <li>How did you handle token refresh in your app?</li>
+            <li>Walk me through the architecture of ProCoach from frontend to DB.</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Practice</h4>
+          <ul>
+            <li>Implement auth context with JWT — login, logout, auto-refresh</li>
+            <li>Build a higher-order component (HOC) that checks auth</li>
+            <li>Implement a route guard using Next.js middleware</li>
+            <li>Draw the system architecture of KhetiValah on paper</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Interview Questions</h4>
+          <ul>
+            <li>"How does JWT work? What's in the payload?"</li>
+            <li>"Where do you store tokens and why?"</li>
+            <li>"How did you implement auth in ProCoach?"</li>
+            <li>"Design the auth system for a multi-role SaaS app."</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d12t1" onchange="updateProgress(12)"><label for="d12t1">Study JWT structure and decode a sample token on jwt.io</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d12t2" onchange="updateProgress(12)"><label for="d12t2">Build auth context with login/logout/token refresh</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d12t3" onchange="updateProgress(12)"><label for="d12t3">Draw architecture diagram for all 3 of your projects</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d12t4" onchange="updateProgress(12)"><label for="d12t4">Explain token storage trade-offs (localStorage vs cookies)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d12t5" onchange="updateProgress(12)"><label for="d12t5">Mock a system design question for a booking app</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What did I learn?</span>
+          <textarea id="ref-12a" placeholder="..."></textarea>
+          <span class="r-label">What is still confusing?</span>
+          <textarea id="ref-12b" placeholder="..."></textarea>
+          <button class="save-btn" onclick="saveReflection(12)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-12" onclick="completeDay(12)">Mark Day 12 Complete</button>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:32px;">Phase 5 · Days 13–15 · Interview Simulation</div>
+
+  <!-- DAY 13 -->
+  <div class="day-card" id="card-13">
+    <div class="day-header" onclick="toggleDay(13)">
+      <div class="day-num-badge" style="background:rgba(74,222,128,0.1);color:var(--phase5);border:1px solid rgba(74,222,128,0.3);">DAY 13</div>
+      <div class="day-header-title">
+        <strong>Mock Technical Interview: JS + React</strong>
+        <span>Phase 5 · Full simulation — no notes allowed</span>
+      </div>
+      <span class="day-progress" id="progress-13">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Review Topics</h4>
+          <ul>
+            <li>Review your weakest areas from Days 4–10 reflections</li>
+            <li>Re-read notes on closures, promises, and useEffect</li>
+            <li>Review your RHF + Zod implementation</li>
+            <li>Re-read your project narratives</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🎯 Mock Interview Questions (No Notes)</h4>
+          <ul>
+            <li>Explain closures with an example. Write the code.</li>
+            <li>What is the event loop? What's the output of this code?</li>
+            <li>Write a debounce function. Now use it in a search input.</li>
+            <li>Explain useEffect dependency array — all 3 cases.</li>
+            <li>When would you use useMemo vs useCallback?</li>
+            <li>Explain RBAC. How did you implement it in ProCoach?</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Live Coding Challenges</h4>
+          <ul>
+            <li>Two Sum — no looking it up</li>
+            <li>Flatten a nested array</li>
+            <li>Implement debounce from scratch</li>
+            <li>Build a search component with debounced API call</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Behavioral Questions</h4>
+          <ul>
+            <li>"Tell me about yourself." (2 minutes, polished)</li>
+            <li>"Describe a challenging problem and how you solved it."</li>
+            <li>"How do you work with backend engineers?"</li>
+            <li>"Why are you looking for a new role?"</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d13t1" onchange="updateProgress(13)"><label for="d13t1">Review weakest areas from earlier reflection notes</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d13t2" onchange="updateProgress(13)"><label for="d13t2">Complete all 4 live coding challenges without help</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d13t3" onchange="updateProgress(13)"><label for="d13t3">Answer all 6 mock interview questions out loud (record yourself)</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d13t4" onchange="updateProgress(13)"><label for="d13t4">Practice "Tell me about yourself" until it feels natural</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d13t5" onchange="updateProgress(13)"><label for="d13t5">Identify gaps from today's mock — write them down</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What went well in the mock?</span>
+          <textarea id="ref-13a" placeholder="What answers felt confident?"></textarea>
+          <span class="r-label">What tripped me up?</span>
+          <textarea id="ref-13b" placeholder="What do I need to drill more?"></textarea>
+          <button class="save-btn" onclick="saveReflection(13)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-13" onclick="completeDay(13)">Mark Day 13 Complete</button>
+    </div>
+  </div>
+
+  <!-- DAY 14 -->
+  <div class="day-card" id="card-14">
+    <div class="day-header" onclick="toggleDay(14)">
+      <div class="day-num-badge" style="background:rgba(74,222,128,0.1);color:var(--phase5);border:1px solid rgba(74,222,128,0.3);">DAY 14</div>
+      <div class="day-header-title">
+        <strong>Gap Filling + Full Project Storytelling</strong>
+        <span>Phase 5 · Fix Day 13 gaps · Polish project narratives</span>
+      </div>
+      <span class="day-progress" id="progress-14">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Study Topics</h4>
+          <ul>
+            <li>Re-study everything that tripped you up in Day 13</li>
+            <li>Practice the concepts you flagged as confusing throughout the 2 weeks</li>
+            <li>Polish your project explanations with concrete numbers and decisions</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🗣️ Project Storytelling Practice</h4>
+          <ul>
+            <li>ProCoach: Problem → Solution → Technical Decisions → Impact</li>
+            <li>RDR Tech: Scale problem → How you solved it → What you learned</li>
+            <li>KhetiValah: Complex booking → Tech stack choices → Business value</li>
+            <li>Use the STAR method for behavioral questions</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">💻 Coding Drill</h4>
+          <ul>
+            <li>Re-attempt problems you struggled with earlier</li>
+            <li>Implement Valid Parentheses</li>
+            <li>Write a deep clone without JSON.parse</li>
+            <li>Implement a frequency counter</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Questions to Nail</h4>
+          <ul>
+            <li>"Why should we hire you over other candidates?"</li>
+            <li>"What's your biggest technical weakness?"</li>
+            <li>"Walk me through your best project from scratch."</li>
+            <li>"Where do you want to be in 2 years?"</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Daily Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d14t1" onchange="updateProgress(14)"><label for="d14t1">Study all flagged gaps from Day 13 reflection</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d14t2" onchange="updateProgress(14)"><label for="d14t2">Write the STAR narratives for all 3 projects</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d14t3" onchange="updateProgress(14)"><label for="d14t3">Re-attempt 3 coding problems without any hints</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d14t4" onchange="updateProgress(14)"><label for="d14t4">Answer all 4 behavioral questions out loud confidently</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d14t5" onchange="updateProgress(14)"><label for="d14t5">Record a 3-minute "best project" explanation and review it</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Reflection</h4>
+          <span class="r-label">What am I most confident about now?</span>
+          <textarea id="ref-14a" placeholder="List your strengths..."></textarea>
+          <span class="r-label">What's my one biggest remaining concern?</span>
+          <textarea id="ref-14b" placeholder="Be specific about tomorrow's final review..."></textarea>
+          <button class="save-btn" onclick="saveReflection(14)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-14" onclick="completeDay(14)">Mark Day 14 Complete</button>
+    </div>
+  </div>
+
+  <!-- DAY 15 -->
+  <div class="day-card" id="card-15">
+    <div class="day-header" onclick="toggleDay(15)">
+      <div class="day-num-badge" style="background:rgba(74,222,128,0.1);color:var(--phase5);border:1px solid rgba(74,222,128,0.3);">DAY 15</div>
+      <div class="day-header-title">
+        <strong>Final Mock + Application Day Prep</strong>
+        <span>Phase 5 · Complete simulation · You're ready to apply</span>
+      </div>
+      <span class="day-progress" id="progress-15">0/5</span>
+      <span class="day-chevron">▼</span>
+    </div>
+    <div class="day-body">
+      <div class="day-body-grid">
+        <div class="db-section">
+          <h4 style="color:var(--phase2);">📚 Final Review</h4>
+          <ul>
+            <li>Light review only — trust your 14 days of work</li>
+            <li>Re-read your Day 1, 7, and 13 reflections</li>
+            <li>Review the 3 project narratives you wrote on Day 14</li>
+            <li>Check your resume — make sure it matches what you can explain</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase3);">🎯 Final Full Mock Interview (1 hour)</h4>
+          <ul>
+            <li>Set a timer. Treat it like a real interview.</li>
+            <li>"Tell me about yourself." (2 min)</li>
+            <li>Live code: Debounce function (20 min)</li>
+            <li>Deep dive: useEffect + closures (15 min)</li>
+            <li>Project drill: ProCoach RBAC (15 min)</li>
+            <li>Questions for interviewer (5 min)</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase4);">📋 Application Prep</h4>
+          <ul>
+            <li>Update LinkedIn headline and "About" section</li>
+            <li>Shortlist 10 target companies for Day 16 onwards</li>
+            <li>Prepare a generic cover letter template</li>
+            <li>Set up a job tracking spreadsheet</li>
+          </ul>
+        </div>
+        <div class="db-section">
+          <h4 style="color:var(--phase1);">🎤 Questions to Prepare FOR the Interviewer</h4>
+          <ul>
+            <li>"What does the frontend tech stack look like?"</li>
+            <li>"What does a typical sprint look like for your team?"</li>
+            <li>"What's the biggest technical challenge the team is facing?"</li>
+            <li>"How do engineers and designers collaborate here?"</li>
+          </ul>
+        </div>
+        <div class="db-section full-width">
+          <h4 style="color:var(--accent);">✅ Final Day Checklist</h4>
+          <div class="checklist-item"><input type="checkbox" id="d15t1" onchange="updateProgress(15)"><label for="d15t1">Complete the 1-hour final mock interview simulation</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d15t2" onchange="updateProgress(15)"><label for="d15t2">Update resume and LinkedIn profile</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d15t3" onchange="updateProgress(15)"><label for="d15t3">Shortlist 10 companies and draft outreach messages</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d15t4" onchange="updateProgress(15)"><label for="d15t4">Review all 15 days of reflection notes</label></div>
+          <div class="checklist-item"><input type="checkbox" id="d15t5" onchange="updateProgress(15)"><label for="d15t5">Start applying. The preparation ends here. Action begins now.</label></div>
+        </div>
+        <div class="db-section full-width reflection-area">
+          <h4 style="color:var(--text-muted);">📝 Final Reflection</h4>
+          <span class="r-label">What am I most confident about going into interviews?</span>
+          <textarea id="ref-15a" placeholder="Write your strengths with conviction..."></textarea>
+          <span class="r-label">What have I genuinely rebuilt in these 15 days?</span>
+          <textarea id="ref-15b" placeholder="Acknowledge your progress honestly..."></textarea>
+          <button class="save-btn" onclick="saveReflection(15)">Save Reflection</button>
+        </div>
+      </div>
+      <button class="complete-day-btn" id="complete-15" onclick="completeDay(15)">Mark Day 15 Complete — Start Applying!</button>
+    </div>
+  </div>
+
+</div><!-- end tab-plan -->
+
+<!-- ======================== PROBLEMS TAB ======================== -->
+<div id="tab-problems" class="tab-section">
+  <div class="section-title">Coding Problem Bank</div>
+  <div class="tip-box" style="margin-bottom:24px;">
+    <strong>Rule</strong> Always attempt without AI first. Struggle for 25+ minutes. Only then check solutions. Mark as solved only if you wrote it from scratch.
+  </div>
+  <div class="problems-grid" id="problems-grid">
+    <!-- populated by JS -->
+  </div>
+  <div class="section-title" style="margin-top:32px;">Bonus: React-specific Challenges</div>
+  <div class="problems-grid" id="react-problems-grid"></div>
+</div>
+
+<!-- ======================== PROGRESS TAB ======================== -->
+<div id="tab-progress" class="tab-section">
+  <div class="section-title">Overall Progress</div>
+  <div class="overall-bar-wrap">
+    <div class="overall-bar-label">
+      <span>COMPLETION</span>
+      <span id="pct-label">0%</span>
+    </div>
+    <div class="overall-bar-track">
+      <div class="overall-bar-fill" id="overall-bar" style="width:0%"></div>
+    </div>
+  </div>
+  <div class="section-title">Day-by-Day Completion</div>
+  <div class="progress-grid" id="progress-dots"></div>
+  <div class="section-title" style="margin-top:32px;">All Reflections</div>
+  <div id="all-reflections"></div>
+</div>
+
+</div><!-- end main -->
+
+<script>
+// ===================== DATA =====================
+const problems = [
+  { name: "Two Sum", tag: "Array" },
+  { name: "Reverse String", tag: "String" },
+  { name: "Palindrome Check", tag: "String" },
+  { name: "Flatten Nested Array", tag: "Array" },
+  { name: "Debounce Function", tag: "JS" },
+  { name: "Throttle Function", tag: "JS" },
+  { name: "Deep Clone Object", tag: "JS" },
+  { name: "Valid Parentheses", tag: "Stack" },
+  { name: "Array Deduplication", tag: "Array" },
+  { name: "Frequency Counter", tag: "Object" },
+  { name: "Implement map()", tag: "Array" },
+  { name: "Implement reduce()", tag: "Array" },
+  { name: "Group By Category", tag: "Reduce" },
+  { name: "Memoize Function", tag: "Closure" },
+  { name: "Promise.all from Scratch", tag: "Async" },
+  { name: "Retry Async Function", tag: "Async" },
+  { name: "Flatten Object", tag: "Object" },
+];
+
+const reactProblems = [
+  { name: "Custom useFetch Hook", tag: "Hook" },
+  { name: "useDebounce Hook", tag: "Hook" },
+  { name: "Infinite Scroll Component", tag: "UX" },
+  { name: "Multi-Step Form (RHF)", tag: "Forms" },
+  { name: "Auth Context + JWT", tag: "Auth" },
+  { name: "Global Error Handler (Axios)", tag: "API" },
+  { name: "Paginated List", tag: "Perf" },
+  { name: "React.memo + useCallback Demo", tag: "Perf" },
+];
+
+const dayTitles = [
+  "ProCoach Deep Dive",
+  "RDR Tech Deep Dive",
+  "KhetiValah + Project Story",
+  "JS Core: Closures & Hoisting",
+  "JS Arrays, Objects & Methods",
+  "Async JS: Event Loop & Promises",
+  "React: Virtual DOM, useState, useEffect",
+  "React Performance Hooks",
+  "Context API, Forms & RHF",
+  "Next.js Rendering & Optimization",
+  "REST APIs & HTTP",
+  "JWT Auth & System Thinking",
+  "Mock Technical Interview",
+  "Gap Filling + Project Storytelling",
+  "Final Mock + Application Prep"
+];
+
+// ===================== STATE =====================
+let state = {
+  completedDays: {},
+  solvedProblems: {},
+  reflections: {},
+  checkboxes: {}
+};
+
+function loadState() {
+  try {
+    const s = localStorage.getItem('prep-tracker-state');
+    if (s) state = JSON.parse(s);
+  } catch(e) {}
+}
+
+function saveState() {
+  try { localStorage.setItem('prep-tracker-state', JSON.stringify(state)); } catch(e) {}
+}
+
+// ===================== NAV =====================
+function showTab(tab) {
+  document.querySelectorAll('.tab-section').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+  if (tab === 'progress') renderProgress();
+}
+
+// ===================== DAY CARDS =====================
+function toggleDay(n) {
+  const card = document.getElementById('card-' + n);
+  card.classList.toggle('open');
+}
+
+function updateProgress(day) {
+  const checks = document.querySelectorAll(`[id^="d${day}t"]`);
+  let done = 0;
+  checks.forEach(c => {
+    if (c.checked) done++;
+    state.checkboxes[c.id] = c.checked;
+  });
+  document.getElementById('progress-' + day).textContent = done + '/' + checks.length;
+  updateStats();
+  saveState();
+}
+
+function completeDay(day) {
+  state.completedDays[day] = !state.completedDays[day];
+  const btn = document.getElementById('complete-' + day);
+  if (state.completedDays[day]) {
+    btn.textContent = '✓ Day ' + day + ' Complete!';
+    btn.classList.add('done');
+  } else {
+    btn.textContent = 'Mark Day ' + day + ' Complete';
+    btn.classList.remove('done');
+  }
+  updateStats();
+  saveState();
+}
+
+function saveReflection(day) {
+  const a = document.getElementById('ref-' + day + 'a');
+  const b = document.getElementById('ref-' + day + 'b');
+  if (!state.reflections[day]) state.reflections[day] = {};
+  state.reflections[day].a = a ? a.value : '';
+  state.reflections[day].b = b ? b.value : '';
+  saveState();
+  const btn = event.target;
+  btn.textContent = 'Saved ✓';
+  setTimeout(() => btn.textContent = 'Save Reflection', 1500);
+}
+
+// ===================== STATS =====================
+function updateStats() {
+  const done = Object.values(state.completedDays).filter(Boolean).length;
+  document.getElementById('days-done').textContent = done;
+  
+  let tasks = 0;
+  document.querySelectorAll('[id^="d"][id*="t"]').forEach(c => { if (c.checked) tasks++; });
+  document.getElementById('tasks-done').textContent = tasks;
+  
+  const problems = Object.values(state.solvedProblems).filter(Boolean).length;
+  document.getElementById('problems-done').textContent = problems;
+}
+
+// ===================== PROBLEMS =====================
+function buildProblems() {
+  const grid = document.getElementById('problems-grid');
+  problems.forEach((p, i) => {
+    const key = 'prob-' + i;
+    const card = document.createElement('div');
+    card.className = 'problem-card' + (state.solvedProblems[key] ? ' solved' : '');
+    card.id = 'pcard-' + i;
+    card.innerHTML = `
+      <input type="checkbox" id="${key}" ${state.solvedProblems[key] ? 'checked' : ''}>
+      <span class="p-name">${p.name}</span>
+      <span class="p-tag">${p.tag}</span>
+    `;
+    card.querySelector('input').addEventListener('change', function() {
+      state.solvedProblems[key] = this.checked;
+      card.classList.toggle('solved', this.checked);
+      updateStats();
+      saveState();
+    });
+    grid.appendChild(card);
+  });
+
+  const rgrid = document.getElementById('react-problems-grid');
+  reactProblems.forEach((p, i) => {
+    const key = 'rprob-' + i;
+    const card = document.createElement('div');
+    card.className = 'problem-card' + (state.solvedProblems[key] ? ' solved' : '');
+    card.innerHTML = `
+      <input type="checkbox" id="${key}" ${state.solvedProblems[key] ? 'checked' : ''}>
+      <span class="p-name">${p.name}</span>
+      <span class="p-tag">${p.tag}</span>
+    `;
+    card.querySelector('input').addEventListener('change', function() {
+      state.solvedProblems[key] = this.checked;
+      card.classList.toggle('solved', this.checked);
+      updateStats();
+      saveState();
+    });
+    rgrid.appendChild(card);
+  });
+}
+
+// ===================== PROGRESS TAB =====================
+function renderProgress() {
+  // Dots
+  const dotsEl = document.getElementById('progress-dots');
+  dotsEl.innerHTML = '';
+  let done = 0;
+  for (let d = 1; d <= 15; d++) {
+    const isDone = state.completedDays[d];
+    if (isDone) done++;
+    const dot = document.createElement('div');
+    dot.className = 'day-dot' + (isDone ? ' done' : '');
+    dot.onclick = () => { completeDay(d); renderProgress(); };
+    dot.innerHTML = `
+      <span class="d-num">${d}</span>
+      <span class="d-lbl">${dayTitles[d-1].split(':')[0].substring(0, 12)}</span>
+      <span class="d-check">${isDone ? '✓' : '○'}</span>
+    `;
+    dotsEl.appendChild(dot);
+  }
+
+  // Bar
+  const pct = Math.round((done / 15) * 100);
+  document.getElementById('overall-bar').style.width = pct + '%';
+  document.getElementById('pct-label').textContent = pct + '%';
+
+  // Reflections
+  const refEl = document.getElementById('all-reflections');
+  refEl.innerHTML = '';
+  for (let d = 1; d <= 15; d++) {
+    const r = state.reflections[d];
+    if (r && (r.a || r.b)) {
+      const box = document.createElement('div');
+      box.className = 'info-box';
+      box.style.marginBottom = '12px';
+      box.innerHTML = `
+        <h3 style="color:var(--accent2)">Day ${d} — ${dayTitles[d-1]}</h3>
+        ${r.a ? `<p style="font-size:12px;color:var(--text-dim);margin-bottom:6px;"><strong style="color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:10px;">LEARNED:</strong><br>${r.a}</p>` : ''}
+        ${r.b ? `<p style="font-size:12px;color:var(--text-dim);"><strong style="color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:10px;">STILL CONFUSING:</strong><br>${r.b}</p>` : ''}
+      `;
+      refEl.appendChild(box);
+    }
+  }
+  if (!refEl.children.length) {
+    refEl.innerHTML = '<p style="color:var(--text-muted);font-size:13px;">No reflections saved yet. Fill them in each day.</p>';
+  }
+}
+
+// ===================== RESTORE STATE =====================
+function restoreState() {
+  // Checkboxes
+  Object.entries(state.checkboxes).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.checked = val;
+  });
+  
+  // Day progress badges
+  for (let d = 1; d <= 15; d++) {
+    updateProgressBadge(d);
+  }
+
+  // Complete buttons
+  Object.entries(state.completedDays).forEach(([day, val]) => {
+    if (val) {
+      const btn = document.getElementById('complete-' + day);
+      if (btn) {
+        btn.textContent = '✓ Day ' + day + ' Complete!';
+        btn.classList.add('done');
+      }
+    }
+  });
+
+  // Reflections
+  Object.entries(state.reflections).forEach(([day, r]) => {
+    const a = document.getElementById('ref-' + day + 'a');
+    const b = document.getElementById('ref-' + day + 'b');
+    if (a && r.a) a.value = r.a;
+    if (b && r.b) b.value = r.b;
+  });
+}
+
+function updateProgressBadge(day) {
+  const checks = document.querySelectorAll(`[id^="d${day}t"]`);
+  let done = 0;
+  checks.forEach(c => { if (c.checked) done++; });
+  const el = document.getElementById('progress-' + day);
+  if (el) el.textContent = done + '/' + checks.length;
+}
+
+// ===================== INIT =====================
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  buildProblems();
+  restoreState();
+  updateStats();
+});
+</script>
+</body>
+</html>
